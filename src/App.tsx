@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Sidebar, ActiveTab } from './components/Sidebar';
 import { Dashboard } from './components/Dashboard';
-import { TimetableGenerator } from './components/TimetableGenerator';
-import { SubjectManager } from './components/SubjectManager';
-import { AttendanceTracker } from './components/AttendanceTracker';
-import { AssignmentTracker } from './components/AssignmentTracker';
-import { ExamPlanner } from './components/ExamPlanner';
-import { StudyPlanner } from './components/StudyPlanner';
-import { AnalyticsReports } from './components/AnalyticsReports';
-import { StudentProfile } from './components/StudentProfile';
-import { SystemSettings } from './components/SystemSettings';
-import { PythonCodeExplorer } from './components/PythonCodeExplorer';
-import { ArchitectureDocs } from './components/ArchitectureDocs';
-
-import { 
-  INITIAL_USER, 
-  INITIAL_SUBJECTS, 
-  INITIAL_ASSIGNMENTS, 
-  INITIAL_EXAMS, 
-  INITIAL_ATTENDANCE, 
+import {
+  INITIAL_USER,
+  INITIAL_SUBJECTS,
+  INITIAL_ASSIGNMENTS,
+  INITIAL_EXAMS,
+  INITIAL_ATTENDANCE,
   INITIAL_NOTIFICATIONS,
-  generateInitialTimetable 
+  generateInitialTimetable,
 } from './data/mockDatabase';
+
+const TimetableGenerator = lazy(() => import('./components/TimetableGenerator').then(({ TimetableGenerator }) => ({ default: TimetableGenerator })));
+const SubjectManager = lazy(() => import('./components/SubjectManager').then(({ SubjectManager }) => ({ default: SubjectManager })));
+const AttendanceTracker = lazy(() => import('./components/AttendanceTracker').then(({ AttendanceTracker }) => ({ default: AttendanceTracker })));
+const AssignmentTracker = lazy(() => import('./components/AssignmentTracker').then(({ AssignmentTracker }) => ({ default: AssignmentTracker })));
+const ExamPlanner = lazy(() => import('./components/ExamPlanner').then(({ ExamPlanner }) => ({ default: ExamPlanner })));
+const StudyPlanner = lazy(() => import('./components/StudyPlanner').then(({ StudyPlanner }) => ({ default: StudyPlanner })));
+const AnalyticsReports = lazy(() => import('./components/AnalyticsReports').then(({ AnalyticsReports }) => ({ default: AnalyticsReports })));
+const StudentProfile = lazy(() => import('./components/StudentProfile').then(({ StudentProfile }) => ({ default: StudentProfile })));
+const SystemSettings = lazy(() => import('./components/SystemSettings').then(({ SystemSettings }) => ({ default: SystemSettings })));
+const PythonCodeExplorer = lazy(() => import('./components/PythonCodeExplorer').then(({ PythonCodeExplorer }) => ({ default: PythonCodeExplorer })));
+const ArchitectureDocs = lazy(() => import('./components/ArchitectureDocs').then(({ ArchitectureDocs }) => ({ default: ArchitectureDocs })));
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>("dashboard");
@@ -64,84 +64,67 @@ export default function App() {
 
         {/* Dynamic Content Viewport */}
         <main className="app-main flex-1 overflow-y-auto">
-          {activeTab === "dashboard" && (
-            <Dashboard
-              user={user}
-              subjects={subjects}
-              timetable={timetable}
-              assignments={assignments}
-              attendance={attendance}
-              exams={exams}
-              setActiveTab={setActiveTab}
-            />
-          )}
+          <Suspense fallback={<div className="page-loading" role="status">Loading view</div>}>
+            {activeTab === "dashboard" && (
+              <Dashboard
+                user={user}
+                subjects={subjects}
+                timetable={timetable}
+                assignments={assignments}
+                attendance={attendance}
+                exams={exams}
+                setActiveTab={setActiveTab}
+              />
+            )}
 
-          {activeTab === "timetable" && (
-            <TimetableGenerator
-              subjects={subjects}
-              timetable={timetable}
-              setTimetable={setTimetable}
-            />
-          )}
+            {activeTab === "timetable" && (
+              <TimetableGenerator
+                subjects={subjects}
+                timetable={timetable}
+                setTimetable={setTimetable}
+              />
+            )}
 
-          {activeTab === "subjects" && (
-            <SubjectManager
-              subjects={subjects}
-              setSubjects={setSubjects}
-            />
-          )}
+            {activeTab === "subjects" && (
+              <SubjectManager subjects={subjects} setSubjects={setSubjects} />
+            )}
 
-          {activeTab === "attendance" && (
-            <AttendanceTracker
-              subjects={subjects}
-              attendance={attendance}
-              setAttendance={setAttendance}
-            />
-          )}
+            {activeTab === "attendance" && (
+              <AttendanceTracker subjects={subjects} attendance={attendance} setAttendance={setAttendance} />
+            )}
 
-          {activeTab === "assignments" && (
-            <AssignmentTracker
-              subjects={subjects}
-              assignments={assignments}
-              setAssignments={setAssignments}
-            />
-          )}
+            {activeTab === "assignments" && (
+              <AssignmentTracker subjects={subjects} assignments={assignments} setAssignments={setAssignments} />
+            )}
 
-          {activeTab === "exams" && (
-            <ExamPlanner
-              subjects={subjects}
-              exams={exams}
-              setExams={setExams}
-            />
-          )}
+            {activeTab === "exams" && (
+              <ExamPlanner subjects={subjects} exams={exams} setExams={setExams} />
+            )}
 
-          {activeTab === "study" && (
-            <StudyPlanner subjects={subjects} />
-          )}
+            {activeTab === "study" && (
+              <StudyPlanner subjects={subjects} />
+            )}
 
-          {activeTab === "analytics" && (
-            <AnalyticsReports
-              subjects={subjects}
-              attendance={attendance}
-              assignments={assignments}
-            />
-          )}
+            {activeTab === "analytics" && (
+              <AnalyticsReports subjects={subjects} attendance={attendance} assignments={assignments} />
+            )}
 
-          {activeTab === "profile" && (
-            <StudentProfile user={user} />
-          )}
+            {activeTab === "profile" && (
+              <StudentProfile user={user} />
+            )}
 
-          {activeTab === "settings" && (
-            <SystemSettings darkMode={darkMode} setDarkMode={setDarkMode} />
-          )}
+            {activeTab === "settings" && (
+              <SystemSettings darkMode={darkMode} setDarkMode={setDarkMode} />
+            )}
 
-          {activeTab === "python_code" && (
-            <PythonCodeExplorer />
-          )}
+            {activeTab === "python_code" && (
+              <PythonCodeExplorer />
+            )}
 
-          {activeTab === "docs" && (
-            <ArchitectureDocs />
-          )}
+            {activeTab === "docs" && (
+              <ArchitectureDocs />
+            )}
+          </Suspense>
         </main>
       </div>
     </div>

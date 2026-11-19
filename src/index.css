@@ -171,6 +171,14 @@ main textarea {
   scrollbar-gutter: stable;
 }
 
+.page-loading {
+  width: min(100%, 1520px);
+  margin-inline: auto;
+  padding: 28px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .app-sidebar {
   width: 256px;
   background: var(--surface);
