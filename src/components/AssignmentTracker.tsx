@@ -76,9 +76,9 @@ export const AssignmentTracker: React.FC<AssignmentTrackerProps> = ({
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
             <FileCheck className="w-5 h-5 text-amber-600 dark:text-amber-400" />
-            Assignment & Project Tracker
+            Assignments
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5">Track coursework deadlines, priorities, marks, and completion status</p>
+          <p className="text-xs text-slate-500 mt-0.5">Coursework, due dates and completion status</p>
         </div>
 
         <button
@@ -112,7 +112,7 @@ export const AssignmentTracker: React.FC<AssignmentTrackerProps> = ({
                   {a.priority} Priority
                 </span>
                 <span className="text-[10px] font-semibold text-slate-400">
-                  💯 {a.marks} Marks
+                  {a.marks} marks
                 </span>
               </div>
 

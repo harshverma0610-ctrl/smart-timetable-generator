@@ -1,7 +1,7 @@
 import sqlite3
 import hashlib
 import os
-from config import DB_PATH
+from .config import DB_PATH
 
 class DatabaseManager:
     def __init__(self, db_path=DB_PATH):

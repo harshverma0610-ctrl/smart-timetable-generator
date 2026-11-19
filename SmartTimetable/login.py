@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from tkinter import messagebox
-from database import db
-from utils import validate_email
+from .database import db
+from .utils import validate_email
 
 class LoginFrame(ctk.CTkFrame):
     def __init__(self, parent, on_login_success, on_navigate_register):

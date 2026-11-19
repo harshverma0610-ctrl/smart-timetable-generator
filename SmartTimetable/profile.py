@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from database import db
+from .database import db
 
 class ProfileFrame(ctk.CTkFrame):
     def __init__(self, parent, user):

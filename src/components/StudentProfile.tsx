@@ -36,7 +36,7 @@ export const StudentProfile: React.FC<StudentProfileProps> = ({ user }) => {
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <User className="w-4 h-4 text-blue-500" />
-            Contact & Credentials
+            Contact details
           </h2>
           <div className="space-y-3 text-xs">
             <div className="flex items-center gap-2.5 text-slate-600 dark:text-slate-400">
@@ -58,7 +58,7 @@ export const StudentProfile: React.FC<StudentProfileProps> = ({ user }) => {
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <GraduationCap className="w-4 h-4 text-emerald-500" />
-            Skills & Competencies
+            Skills
           </h2>
           <div className="flex flex-wrap gap-2">
             {user.skills.map((skill, i) => (

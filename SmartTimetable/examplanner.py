@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from datetime import datetime
 from tkinter import messagebox
-from database import db
+from .database import db
 
 class ExamPlannerFrame(ctk.CTkFrame):
     def __init__(self, parent, user):

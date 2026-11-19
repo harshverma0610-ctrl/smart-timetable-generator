@@ -46,7 +46,7 @@ export default function App() {
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans antialiased selection:bg-blue-500 selection:text-white transition-colors duration-200">
+    <div className="app-shell flex flex-col font-sans text-slate-900 antialiased dark:text-slate-100">
       {/* Top Navigation Bar */}
       <Header
         user={user}
@@ -58,12 +58,12 @@ export default function App() {
       />
 
       {/* Main App Layout */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex min-h-0 flex-1 overflow-hidden">
         {/* Sidebar */}
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
 
         {/* Dynamic Content Viewport */}
-        <main className="flex-1 overflow-y-auto bg-[#F1F5F9] dark:bg-slate-950">
+        <main className="app-main flex-1 overflow-y-auto">
           {activeTab === "dashboard" && (
             <Dashboard
               user={user}

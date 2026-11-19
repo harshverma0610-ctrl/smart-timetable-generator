@@ -1,8 +1,8 @@
 import customtkinter as ctk
 from tkinter import messagebox
-from database import db
-from config import DAYS_OF_WEEK, TIME_SLOTS
-from utils import generate_auto_timetable
+from .database import db
+from .config import DAYS_OF_WEEK, TIME_SLOTS
+from .utils import generate_auto_timetable
 
 class TimetableFrame(ctk.CTkFrame):
     def __init__(self, parent, user):

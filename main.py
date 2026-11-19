@@ -1,12 +1,7 @@
-#!/usr/bin/env python3
-import os
-import sys
+"""Backward-compatible launcher for the SmartTimetable desktop app."""
 
-# Add SmartTimetable package directory to sys.path
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "SmartTimetable"))
+from SmartTimetable.__main__ import main
 
-from main import SmartTimetableApp
 
 if __name__ == "__main__":
-    app = SmartTimetableApp()
-    app.mainloop()
+    main()

@@ -50,9 +50,9 @@ export const ExamPlanner: React.FC<ExamPlannerProps> = ({ subjects, exams, setEx
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
             <GraduationCap className="w-5 h-5 text-violet-600 dark:text-violet-400" />
-            Exam Scheduler & Revision Planner
+            Exam planner
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5">Manage exam dates, venues, syllabus coverage, and study countdowns</p>
+          <p className="text-xs text-slate-500 mt-0.5">Exam dates, venues and revision topics</p>
         </div>
 
         <button
@@ -91,7 +91,7 @@ export const ExamPlanner: React.FC<ExamPlannerProps> = ({ subjects, exams, setEx
 
               <div className="p-3 rounded-xl bg-violet-50 dark:bg-violet-950/40 border border-violet-100 dark:border-violet-900 text-center">
                 <span className="text-2xl font-black text-violet-600 dark:text-violet-400">
-                  ⏳ {daysLeft} Days Left
+                  {daysLeft} days left
                 </span>
                 <p className="text-[10px] font-semibold text-slate-500 mt-0.5">Exam Date: {ex.date}</p>
               </div>

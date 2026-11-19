@@ -1,8 +1,8 @@
 import customtkinter as ctk
 from datetime import datetime
 from tkinter import messagebox
-from database import db
-from utils import calculate_attendance_stats
+from .database import db
+from .utils import calculate_attendance_stats
 
 class AttendanceFrame(ctk.CTkFrame):
     def __init__(self, parent, user):

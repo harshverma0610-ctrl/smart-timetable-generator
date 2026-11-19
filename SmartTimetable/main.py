@@ -1,19 +1,19 @@
 import customtkinter as ctk
 from tkinter import messagebox
-from login import LoginFrame
-from register import RegisterFrame
-from dashboard import DashboardFrame
-from timetable import TimetableFrame
-from subjects import SubjectsFrame
-from attendance import AttendanceFrame
-from assignments import AssignmentsFrame
-from examplanner import ExamPlannerFrame
-from studyplanner import StudyPlannerFrame
-from notifications import NotificationsFrame
-from reports import ReportsFrame
-from profile import ProfileFrame
-from settings import SettingsFrame
-from config import APP_NAME
+from .login import LoginFrame
+from .register import RegisterFrame
+from .dashboard import DashboardFrame
+from .timetable import TimetableFrame
+from .subjects import SubjectsFrame
+from .attendance import AttendanceFrame
+from .assignments import AssignmentsFrame
+from .examplanner import ExamPlannerFrame
+from .studyplanner import StudyPlannerFrame
+from .notifications import NotificationsFrame
+from .reports import ReportsFrame
+from .profile import ProfileFrame
+from .settings import SettingsFrame
+from .config import APP_NAME
 
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
@@ -159,7 +159,3 @@ class SmartTimetableApp(ctk.CTk):
     def clear_container(self):
         for widget in self.container.winfo_children():
             widget.destroy()
-
-if __name__ == "__main__":
-    app = SmartTimetableApp()
-    app.mainloop()

@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from tkinter import messagebox
-from database import db
-from utils import validate_email, validate_phone, validate_roll, check_password_strength
+from .database import db
+from .utils import validate_email, validate_phone, validate_roll, check_password_strength
 
 class RegisterFrame(ctk.CTkFrame):
     def __init__(self, parent, on_register_success, on_navigate_login):

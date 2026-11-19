@@ -208,7 +208,7 @@ plyer>=2.1.0`
             Python Desktop Application Source Code Explorer
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            100% Executable Python 3.12 + CustomTkinter Desktop Code (`python main.py`)
+            Browse the Python project files and copy or download source code
           </p>
         </div>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Timer, Play, Pause, RotateCcw, Sparkles, CheckCircle2, Flame, Award } from 'lucide-react';
+import { Timer, Play, Pause, RotateCcw, ListFilter, CheckCircle2 } from 'lucide-react';
 import { Subject, StudyGoal } from '../types';
 
 interface StudyPlannerProps {
@@ -85,9 +85,9 @@ export const StudyPlanner: React.FC<StudyPlannerProps> = ({ subjects }) => {
           <p className="text-xs text-slate-500 mt-0.5">Optimize study time allocation, track focus sessions, and maintain daily study streaks</p>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-300 font-bold text-xs">
-          <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
-          <span>4 Day Study Streak!</span>
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm">
+          <Timer className="w-4 h-4" strokeWidth={1.7} />
+          <span>{sessionCount} completed sessions</span>
         </div>
       </div>
 
@@ -97,9 +97,9 @@ export const StudyPlanner: React.FC<StudyPlannerProps> = ({ subjects }) => {
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center text-center space-y-6">
           <div className="space-y-1">
             <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
-              {mode === "work" ? "🧠 Deep Work Focus" : "☕ Short Break"}
+              {mode === "work" ? "Focus session" : "Short break"}
             </span>
-            <p className="text-xs text-slate-500 mt-2">Pomodoro Session #{sessionCount} Completed</p>
+              <p className="text-xs text-slate-500 mt-2">Session {sessionCount + 1}</p>
           </div>
 
           <div className="text-6xl sm:text-7xl font-black tracking-tight text-slate-900 dark:text-white font-mono my-2">
@@ -126,19 +126,19 @@ export const StudyPlanner: React.FC<StudyPlannerProps> = ({ subjects }) => {
           </div>
         </div>
 
-        {/* Right: AI Study Goal Optimizer */}
+        {/* Study time suggestions */}
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-base font-bold text-slate-900 dark:text-white">AI Study Goal Optimizer</h2>
-              <p className="text-xs text-slate-500">Auto-allocates study time based on subject difficulty</p>
+              <h2 className="text-base font-bold text-slate-900 dark:text-white">Study goals</h2>
+              <p className="text-xs text-slate-500">Suggested session lengths reflect subject difficulty</p>
             </div>
             <button
               onClick={handleGenerateGoals}
               className="px-3.5 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-100 font-bold text-xs flex items-center gap-1.5 transition-colors"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Optimize Goals</span>
+              <ListFilter className="w-3.5 h-3.5" />
+              <span>Balance by difficulty</span>
             </button>
           </div>
 
@@ -159,7 +159,7 @@ export const StudyPlanner: React.FC<StudyPlannerProps> = ({ subjects }) => {
                     <h3 className={`text-xs font-bold ${g.isDone ? 'line-through text-slate-400' : 'text-slate-900 dark:text-white'}`}>
                       {g.subjectName}
                     </h3>
-                    <p className="text-[11px] text-slate-500">Target Duration: {g.targetMinutes} Mins • {g.difficulty}</p>
+                    <p className="text-[11px] text-slate-500">{g.targetMinutes} minutes · {g.difficulty.toLowerCase()}</p>
                   </div>
                 </div>
 

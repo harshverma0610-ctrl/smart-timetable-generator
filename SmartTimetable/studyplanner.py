@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import time
 from tkinter import messagebox
-from database import db
+from .database import db
 
 class StudyPlannerFrame(ctk.CTkFrame):
     def __init__(self, parent, user):

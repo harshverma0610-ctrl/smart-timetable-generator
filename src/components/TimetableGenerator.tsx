@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  Sparkles, 
+  CalendarDays,
   Printer, 
   FileSpreadsheet, 
   QrCode, 
@@ -17,7 +17,7 @@ import { TIME_SLOTS_LIST } from '../data/mockDatabase';
 import QRCode from 'qrcode';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import * as XLSX from 'xlsx';
+import { downloadCsv } from '../utils/downloadCsv';
 
 interface TimetableGeneratorProps {
   subjects: Subject[];
@@ -166,22 +166,13 @@ export const TimetableGenerator: React.FC<TimetableGeneratorProps> = ({
     doc.save('Smart_Timetable_Report.pdf');
   };
 
-  // Export Excel Report
-  const handleExportExcel = () => {
-    const excelData = timetable.map(t => ({
-      Day: t.day,
-      TimeSlot: t.slotTime,
-      SubjectCode: t.subjectCode,
-      SubjectName: t.subjectName,
-      Faculty: t.faculty,
-      Classroom: t.classroom,
-      SlotType: t.slotType
-    }));
-
-    const worksheet = XLSX.utils.json_to_sheet(excelData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Timetable");
-    XLSX.writeFile(workbook, "Smart_Timetable_Export.xlsx");
+  // Export spreadsheet-friendly CSV
+  const handleExportCsv = () => {
+    downloadCsv(
+      'Smart_Timetable_Export.csv',
+      ['Day', 'Time Slot', 'Subject Code', 'Subject Name', 'Faculty', 'Classroom', 'Slot Type'],
+      timetable.map(t => [t.day, t.slotTime, t.subjectCode, t.subjectName, t.faculty, t.classroom, t.slotType]),
+    );
   };
 
   return (
@@ -190,11 +181,11 @@ export const TimetableGenerator: React.FC<TimetableGeneratorProps> = ({
       <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            Smart Timetable Auto-Generator
+            <CalendarDays className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            Weekly timetable
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Zero teacher & classroom conflict constraint engine
+            Build a balanced weekly schedule from your subjects
           </p>
         </div>
 
@@ -203,7 +194,7 @@ export const TimetableGenerator: React.FC<TimetableGeneratorProps> = ({
             onClick={handleAutoGenerate}
             className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/20 flex items-center gap-2 transition-all"
           >
-            <Sparkles className="w-4 h-4" />
+            <CalendarDays className="w-4 h-4" />
             <span>Auto-Generate</span>
           </button>
 
@@ -216,11 +207,11 @@ export const TimetableGenerator: React.FC<TimetableGeneratorProps> = ({
           </button>
 
           <button
-            onClick={handleExportExcel}
+            onClick={handleExportCsv}
             className="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-semibold text-xs flex items-center gap-1.5 transition-colors"
           >
             <FileSpreadsheet className="w-4 h-4 text-emerald-500" />
-            <span>Excel</span>
+            <span>CSV</span>
           </button>
 
           <button
@@ -315,7 +306,7 @@ export const TimetableGenerator: React.FC<TimetableGeneratorProps> = ({
                       return (
                         <td key={slotTime} className="p-2 bg-slate-100/80 dark:bg-slate-800/80 text-center">
                           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                            🍱 LUNCH
+                            Lunch
                           </span>
                         </td>
                       );
@@ -324,13 +315,13 @@ export const TimetableGenerator: React.FC<TimetableGeneratorProps> = ({
                       <td key={slotTime} className="p-2">
                         {entry ? (
                           <div
-                            className="p-2.5 rounded-xl text-white shadow-sm transition-transform hover:scale-[1.02]"
+                            className="p-2.5 rounded-xl text-white"
                             style={{ backgroundColor: entry.colorLabel }}
                           >
                             <p className="text-xs font-extrabold leading-tight">{entry.subjectName}</p>
                             <p className="text-[10px] text-white/80 font-medium mt-0.5">{entry.subjectCode}</p>
                             <div className="flex items-center justify-between text-[9px] text-white/90 font-semibold mt-1.5 pt-1 border-t border-white/20">
-                              <span>🏫 {entry.classroom}</span>
+                              <span>Room {entry.classroom}</span>
                               <span className="uppercase px-1 rounded bg-black/20">{entry.slotType}</span>
                             </div>
                           </div>
@@ -398,7 +389,7 @@ export const TimetableGenerator: React.FC<TimetableGeneratorProps> = ({
             </button>
 
             <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">Share Timetable via QR</h3>
-            <p className="text-xs text-slate-500 mb-4">Scan with smartphone camera to sync schedule</p>
+            <p className="text-xs text-slate-500 mb-4">Scan to share this timetable</p>
 
             {qrDataUrl && (
               <img src={qrDataUrl} alt="Timetable QR" className="w-48 h-48 mx-auto rounded-xl shadow-md border border-slate-200 p-2" />

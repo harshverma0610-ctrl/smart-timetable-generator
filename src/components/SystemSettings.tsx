@@ -12,9 +12,9 @@ export const SystemSettings: React.FC<SystemSettingsProps> = ({ darkMode, setDar
       <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
         <h1 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
           <Settings className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-          System Preferences & Maintenance
+          Preferences
         </h1>
-        <p className="text-xs text-slate-500 mt-0.5">Customize UI themes, notifications, and SQLite database backup/restore</p>
+        <p className="text-xs text-slate-500 mt-0.5">Choose a theme and manage local data</p>
       </div>
 
       <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">

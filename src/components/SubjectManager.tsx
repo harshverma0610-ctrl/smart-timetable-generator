@@ -63,9 +63,9 @@ export const SubjectManager: React.FC<SubjectManagerProps> = ({ subjects, setSub
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            Subject Management Directory
+            Subjects
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5">Manage course details, credit loads, classrooms, and color badges</p>
+          <p className="text-xs text-slate-500 mt-0.5">Course details, instructors, rooms and credit hours</p>
         </div>
 
         <button

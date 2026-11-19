@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from datetime import datetime
-from database import db
-from utils import calculate_attendance_stats
+from .database import db
+from .utils import calculate_attendance_stats
 
 class DashboardFrame(ctk.CTkFrame):
     def __init__(self, parent, user, navigate_tab_cb):

@@ -1,1 +1,488 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Segoe UI Variable", "Segoe UI", sans-serif;
+  --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+
+  --color-slate-50: #f7f7f5;
+  --color-slate-100: #f0f0ed;
+  --color-slate-200: #e2e2de;
+  --color-slate-300: #cecfca;
+  --color-slate-400: #898a84;
+  --color-slate-500: #6b6d66;
+  --color-slate-600: #555750;
+  --color-slate-700: #41433e;
+  --color-slate-800: #30322d;
+  --color-slate-900: #20211e;
+  --color-slate-950: #151613;
+
+  --color-blue-50: #edf3fa;
+  --color-blue-100: #d9e6f5;
+  --color-blue-200: #bdd2ea;
+  --color-blue-300: #9ab8db;
+  --color-blue-400: #7298c6;
+  --color-blue-500: #4c79ae;
+  --color-blue-600: #315f96;
+  --color-blue-700: #274d7a;
+  --color-blue-800: #203d60;
+  --color-blue-900: #192d46;
+  --color-blue-950: #111d2d;
+
+  --color-indigo-50: #edf3fa;
+  --color-indigo-100: #d9e6f5;
+  --color-indigo-200: #bdd2ea;
+  --color-indigo-300: #9ab8db;
+  --color-indigo-400: #7298c6;
+  --color-indigo-500: #4c79ae;
+  --color-indigo-600: #315f96;
+  --color-indigo-700: #274d7a;
+  --color-indigo-800: #203d60;
+  --color-indigo-900: #192d46;
+  --color-indigo-950: #111d2d;
+
+  --color-violet-50: #edf3fa;
+  --color-violet-100: #d9e6f5;
+  --color-violet-200: #bdd2ea;
+  --color-violet-300: #9ab8db;
+  --color-violet-400: #7298c6;
+  --color-violet-500: #4c79ae;
+  --color-violet-600: #315f96;
+  --color-violet-700: #274d7a;
+  --color-violet-800: #203d60;
+  --color-violet-900: #192d46;
+  --color-violet-950: #111d2d;
+}
+
+:root {
+  color-scheme: light;
+  --app-bg: #f5f5f2;
+  --surface: #ffffff;
+  --raised: #f1f1ee;
+  --line: #e2e2de;
+  --ink: #20211e;
+  --muted: #656760;
+  --accent: #315f96;
+  --accent-soft: #edf3fa;
+  --focus: #315f96;
+}
+
+.dark {
+  color-scheme: dark;
+  --app-bg: #171816;
+  --surface: #20211e;
+  --raised: #292a26;
+  --line: #383a34;
+  --ink: #efefeb;
+  --muted: #a4a69e;
+  --accent: #88a9d0;
+  --accent-soft: #202b39;
+  --focus: #88a9d0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--app-bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--app-bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+main input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+main select,
+main textarea {
+  min-height: 40px;
+  padding-inline: 12px;
+  border: 1px solid var(--line) !important;
+  border-radius: 8px !important;
+  background: var(--surface) !important;
+  color: var(--ink) !important;
+  font-size: 14px !important;
+}
+
+main textarea {
+  padding-block: 10px;
+}
+
+[class~="backdrop-blur-sm"] {
+  backdrop-filter: none !important;
+}
+
+#root,
+.app-shell {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.app-shell {
+  min-height: 0;
+  background: var(--app-bg);
+}
+
+.app-header {
+  flex: 0 0 60px;
+  height: 60px;
+  padding-inline: 24px;
+  background: var(--surface);
+  border-color: var(--line);
+  backdrop-filter: none;
+}
+
+.app-main {
+  min-width: 0;
+  overflow-x: hidden;
+  background: var(--app-bg);
+  scrollbar-gutter: stable;
+}
+
+.app-sidebar {
+  width: 256px;
+  background: var(--surface);
+  color: var(--muted);
+  border-color: var(--line);
+}
+
+.app-sidebar > div:first-child {
+  padding: 24px 16px;
+}
+
+.app-sidebar nav button,
+.app-sidebar [data-nav-item] {
+  min-height: 36px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease;
+}
+
+.app-sidebar nav button[aria-current="page"],
+.app-sidebar [data-nav-item][aria-current="page"] {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.app-sidebar .brand-mark {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--accent);
+  background: var(--raised);
+  font: 600 11px/1 var(--font-mono);
+  letter-spacing: 0;
+}
+
+.page-content {
+  width: min(100%, 1520px);
+  margin-inline: auto;
+  padding: 28px;
+}
+
+.app-main > div[class*="max-w-"] {
+  width: min(100%, 1520px);
+  max-width: none;
+  min-width: 0;
+  margin-inline: auto;
+  padding: 28px;
+}
+
+.app-main [class*="grid"] > * {
+  min-width: 0;
+}
+
+main [class~="rounded-2xl"] {
+  border-radius: 14px !important;
+}
+
+main [class~="p-3.5"] {
+  padding: 12px !important;
+}
+
+main [class~="px-3.5"] {
+  padding-inline: 12px !important;
+}
+
+main [class~="py-2.5"] {
+  padding-block: 8px !important;
+}
+
+main h1 > svg {
+  color: var(--muted) !important;
+}
+
+main svg[class~="w-3.5"],
+main svg[class~="h-3.5"] {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+main svg[class~="w-5"],
+main svg[class~="h-5"] {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.surface-card {
+  background-color: var(--surface) !important;
+  border-color: var(--line) !important;
+  box-shadow: none !important;
+}
+
+.surface-raised {
+  background-color: var(--raised) !important;
+  border-color: var(--line) !important;
+}
+
+.next-class-row {
+  border-inline-start: 0 !important;
+}
+
+.next-class-row .schedule-rule {
+  background-color: var(--accent) !important;
+  width: 3px !important;
+}
+
+.primary-action {
+  color: #fff !important;
+  background-color: #315f96 !important;
+  border: 1px solid #315f96 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+.primary-action:hover {
+  background-color: #274d7a !important;
+}
+
+.app-main button[class*="bg-blue-600"],
+.app-main button[class*="bg-indigo-600"],
+.app-main button[class*="bg-violet-600"],
+.app-main button[class*="bg-amber-600"],
+.app-main button[class*="bg-amber-500"],
+.app-main button[class*="bg-emerald-600"],
+.app-main button[class*="bg-red-600"] {
+  color: #fff !important;
+  background-color: #315f96 !important;
+  border-color: #315f96 !important;
+  box-shadow: none !important;
+}
+
+.app-main button[class*="bg-blue-600"]:hover,
+.app-main button[class*="bg-indigo-600"]:hover,
+.app-main button[class*="bg-violet-600"]:hover,
+.app-main button[class*="bg-amber-600"]:hover,
+.app-main button[class*="bg-amber-500"]:hover,
+.app-main button[class*="bg-emerald-600"]:hover,
+.app-main button[class*="bg-red-600"]:hover {
+  background-color: #274d7a !important;
+}
+
+.secondary-action {
+  color: var(--ink) !important;
+  background-color: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+.secondary-action:hover {
+  background-color: var(--raised) !important;
+}
+
+.field-control {
+  min-height: 40px;
+  background-color: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 8px !important;
+  color: var(--ink) !important;
+  font-size: 14px !important;
+}
+
+main h1 {
+  font-size: 26px !important;
+  line-height: 1.2 !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.015em !important;
+}
+
+main h2 {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
+
+main h3 {
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
+
+[class~="font-bold"],
+[class~="font-black"],
+[class~="font-extrabold"] {
+  font-weight: 500 !important;
+}
+
+[class~="uppercase"] {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+[class~="text-[9px]"],
+[class~="text-[10px]"],
+[class~="text-[11px]"] {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+[class*="shadow-"] {
+  box-shadow: none !important;
+}
+
+[class~="transition-all"] {
+  transition-property: color, background-color, border-color, opacity, transform !important;
+  transition-duration: 140ms !important;
+  transition-timing-function: ease !important;
+}
+
+@media (max-width: 767px) {
+  .app-header {
+    height: 56px;
+    flex-basis: 56px;
+    padding-inline: 12px;
+  }
+
+  .app-header .workspace-status {
+    display: none;
+  }
+
+  .page-content {
+    padding: 20px 16px 80px;
+  }
+
+  .app-main > div[class*="max-w-"] {
+    padding: 20px 16px 80px;
+  }
+
+  .app-sidebar {
+    position: fixed;
+    z-index: 40;
+    inset-inline: 0;
+    inset-block-end: 0;
+    width: 100%;
+    height: 60px;
+    display: block;
+    border-top: 1px solid var(--line);
+    border-right: 0;
+  }
+
+  .app-sidebar > div:first-child {
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px;
+  }
+
+  .app-sidebar .brand-lockup,
+  .app-sidebar .nav-section,
+  .app-sidebar > div:last-child {
+    display: none;
+  }
+
+  .app-sidebar nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .app-sidebar nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app-sidebar nav button {
+    width: 48px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    flex: 0 0 44px;
+    justify-content: center;
+    padding: 0;
+    border-radius: 8px;
+  }
+
+  .app-sidebar nav button span {
+    display: none;
+  }
+
+  .app-sidebar nav button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .app-main {
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  main h1 {
+    font-size: 23px !important;
+  }
+
+  .page-content {
+    padding-inline: 12px;
+  }
+
+  .app-main > div[class*="max-w-"] {
+    padding-inline: 12px;
+  }
+}

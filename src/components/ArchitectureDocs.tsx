@@ -81,7 +81,7 @@ export const ArchitectureDocs: React.FC = () => {
    └───────────────────┴─────────────────┼───────────────────┘
                                          │
                                          ▼
-                            [ Export PDF / Excel / DB ]
+                            [ Export PDF / CSV / DB ]
             `}</pre>
           </div>
         </div>
